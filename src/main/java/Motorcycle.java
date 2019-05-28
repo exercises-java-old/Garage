@@ -12,6 +12,11 @@ public class Motorcycle extends Vehicle {
         this.fuelType = fuelType;
     }
 
+    @Override
+    public void payment() {
+
+    }
+
     public Motorcycle(String registrationNumber, String fuelType) {
         super(registrationNumber);
         this.fuelType = fuelType;

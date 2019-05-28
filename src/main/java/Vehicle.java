@@ -4,6 +4,10 @@ public abstract class Vehicle {
     protected String color;
     protected int numberOfWheels;
 
+
+
+    protected int parkinglotNumber;
+
     public Vehicle(){
         registrationNumber = "AAA111";
         color = "red";
@@ -26,5 +30,13 @@ public abstract class Vehicle {
 
     public String getRegistrationNumber() {
         return registrationNumber;
+    }
+
+    public int getParkinglotNumber() {
+        return parkinglotNumber;
+    }
+
+    public void setParkinglotNumber(int parkinglotNumber) {
+        this.parkinglotNumber = parkinglotNumber;
     }
 }

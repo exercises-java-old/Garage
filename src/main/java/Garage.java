@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Garage implements GarageInterface{
 
@@ -10,24 +7,31 @@ public class Garage implements GarageInterface{
 
     private int maxCapacity = 96;
 
+    private int currentParkingLot = 1;
+
     private Map<Integer, Vehicle> vehicles = new HashMap<>(maxCapacity);
 
-    public void park(Vehicle vehicle) {
-
+    public int park(Vehicle vehicle) {
+        if(currentParkingLot <= maxCapacity) {
+            vehicle.setParkinglotNumber(currentParkingLot);
+            vehicles.put(currentParkingLot, vehicle);
+        }
+        return ++currentParkingLot;
     }
 
     public void unpark(Vehicle vehicle) {
-
+        vehicles.remove(vehicle.getParkinglotNumber());
+        vehicle.setParkinglotNumber(0);
     }
 
-    public boolean findVehicleByRegistrationNumber(String registrationNumber){
-        List<Vehicle> temp = (ArrayList)vehicles.values();
+    public Vehicle getVehicleByRegistrationNumber(String registrationNumber){
+        Collection<Vehicle> temp = vehicles.values();
         for(Vehicle vehicle : temp){
             if(vehicle.getRegistrationNumber().equals(registrationNumber)){
-                return true;
+                return vehicle;
             }
         }
-        return false;
+        return new EmptyVehicle();
     }
 
     public String getVehicles() {

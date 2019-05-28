@@ -7,6 +7,11 @@ public class Bus extends Vehicle{
         numberOfSeats = 40;
     }
 
+    @Override
+    public void payment() {
+
+    }
+
     public Bus(int numberOfSeats) {
         super();
         this.numberOfSeats = numberOfSeats;

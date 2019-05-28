@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public interface GarageInterface {
 
-    void park(Vehicle vehicle);
+    int park(Vehicle vehicle);
 
     void unpark(Vehicle vehicle);
 
-    boolean findVehicleByRegistrationNumber(String registrationNumber);
+    Vehicle getVehicleByRegistrationNumber(String registrationNumber);
 
     //to print out their properties
     String getVehicles();
