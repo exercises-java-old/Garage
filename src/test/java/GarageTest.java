@@ -8,14 +8,14 @@ public class GarageTest {
     public void park() {
         Garage testGarage = new Garage();
         Vehicle testVehicle1 = new Car("QWE001");
-        Vehicle testVehicle2 = new Car("QWE002");
+        Vehicle testVehicle2 = new Car("QWE001");
         Vehicle testVehicle3 = new Car("QWE003");
         Vehicle testVehicle4 = new Car("QWE004");
         Vehicle testVehicle5 = new Car("QWE005");
 
         Vehicle testVehicle6 = new Bus("RTY412", 30);
 
-        Vehicle testMotorbike1 = new Motorcycle("LSD007", "gasoline");
+        Vehicle testMotorbike1 = new Motorcycle("DSL007", "gasoline");
 
 
 
@@ -31,13 +31,17 @@ public class GarageTest {
             testGarage.park(new EmptyVehicle(), 1);
         }
 */
+        testGarage.unpark("QWE003");
+        testGarage.unpark("QWE004");
 
-
+        /*
         assertSame( testVehicle1, testGarage.getVehicleByRegistrationNumber("QWE001"));
-        assertSame(testMotorbike1, testGarage.getVehicleByRegistrationNumber("LSD007"));
+        assertSame(testMotorbike1, testGarage.getVehicleByRegistrationNumber("DSL007"));
         assertSame(testVehicle6, testGarage.getVehicleByRegistrationNumber("RTY412"));
-        System.out.println(testGarage);
+        assertSame(testVehicle3, testGarage.getVehicleByRegistrationNumber("QWE003"));
+        */
 
+        System.out.println(testGarage);
     }
 
     @Test

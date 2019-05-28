@@ -3,6 +3,7 @@ import java.util.*;
 
 public class Garage implements GarageInterface {
 
+    //You have to set your own absolute path
     private static String filePath = "C:\\Users\\zgrkbr\\git\\Garage\\garage.kib";
 
     private int maxCapacity = 30;
@@ -23,6 +24,20 @@ public class Garage implements GarageInterface {
         vehicle.setParkinglotNumber(0);
     }
 
+    public void unpark(String registrationNumber){
+        Collection<Vehicle> temp = vehicles.values();
+        Iterator iter = temp.iterator();
+
+        while(iter.hasNext()){
+            Vehicle v = (Vehicle)iter.next();
+            if(v.getRegistrationNumber().equalsIgnoreCase(registrationNumber)){
+                int lotNumber = v.getParkinglotNumber();
+                vehicles.remove(lotNumber);
+                break;
+            }
+        }
+    }
+
     public Vehicle getVehicleByRegistrationNumber(String registrationNumber) {
         Collection<Vehicle> temp = vehicles.values();
         for (Vehicle vehicle : temp) {
@@ -33,11 +48,11 @@ public class Garage implements GarageInterface {
         return new EmptyVehicle();
     }
 
+    //to be implemented
     public String getVehicles() {
         return null;
     }
 
-    @Override
     public ArrayList<String> getTypesParked() {
         return null;
     }

@@ -1,6 +1,6 @@
 public class EmptyVehicle extends Vehicle {
     @Override
-    public void park(Garage garage) {
-
+    public boolean park(Garage garage) {
+        return false;
     }
 }

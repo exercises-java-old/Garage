@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public abstract class Vehicle {
 
     protected String registrationNumber;
@@ -7,6 +9,8 @@ public abstract class Vehicle {
     protected int parkinglotNumber;
 
     protected Color color;
+
+    protected static ArrayList<String> takenRegistrationNumbers = new ArrayList<>();
 
     protected static int CAR = 1;
     protected static int MOTORCYCLE = 11;
@@ -19,7 +23,8 @@ public abstract class Vehicle {
     }
 
     public Vehicle(String registrationNumber){
-        this.registrationNumber = registrationNumber;
+        if( !setRegistrationNumber(registrationNumber) )
+            throw new IllegalArgumentException("The registration number "+registrationNumber+" is already taken.");
         color = Color.RED;
         numberOfWheels = 4;
     }
@@ -30,10 +35,21 @@ public abstract class Vehicle {
         this.numberOfWheels = numberOfWheels;
     }
 
-    public abstract void park(Garage garage);
+    public abstract boolean park(Garage garage);
 
     public String getRegistrationNumber() {
         return registrationNumber;
+    }
+
+    public boolean setRegistrationNumber(String registrationNumber){
+        for(String regnum : takenRegistrationNumbers){
+            if(regnum.equalsIgnoreCase(registrationNumber)) {
+                return false;
+            }
+        }
+        takenRegistrationNumbers.add(registrationNumber);
+        this.registrationNumber = registrationNumber;
+        return true;
     }
 
     public int getParkinglotNumber() {

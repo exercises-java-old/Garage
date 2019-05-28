@@ -23,10 +23,12 @@ public class Motorcycle extends Vehicle {
     }
 
     @Override
-    public void park(Garage garage) {
+    public boolean park(Garage garage) {
         int emptySlot = garage.findParkingLot(Vehicle.MOTORCYCLE);
         if(emptySlot != -1){
             garage.park(this, emptySlot);
+            return true;
         }
+        return false;
     }
 }

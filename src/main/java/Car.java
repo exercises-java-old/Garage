@@ -17,14 +17,16 @@ public class Car extends Vehicle{
         this.cylinderVolume = cylinderVolume;
     }
 
-    public void park(Garage garage){
+    public boolean park(Garage garage){
         /*
         go through the garage, when we find an empty slot, we park the vehicle there.
          */
         int emptySlot = garage.findParkingLot(Vehicle.CAR);
         if(emptySlot != -1){
             garage.park(this, emptySlot);
+            return true;
         }
+        return false;
     }
 
     public String toString(){

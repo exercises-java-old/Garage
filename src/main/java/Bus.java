@@ -13,6 +13,7 @@ public class Bus extends Vehicle{
         this.numberOfSeats = numberOfSeats;
     }
 
+    //numberOfSeats can be set to 0 or less.
     public Bus(String registrationNumber, int numberOfSeats) {
         super(registrationNumber);
         this.numberOfSeats = numberOfSeats;
@@ -24,11 +25,14 @@ public class Bus extends Vehicle{
     }
 
     @Override
-    public void park(Garage garage) {
+    //returns -1 instead of throwing exception
+    public boolean park(Garage garage) {
         int emptySlot = garage.findParkingLot(Vehicle.BUS);
         if(emptySlot != -1){
             garage.park(this, emptySlot);
+            return true;
         }
+        return false;
     }
 
 
