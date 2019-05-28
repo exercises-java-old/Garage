@@ -1,32 +1,36 @@
 public abstract class Vehicle {
 
     protected String registrationNumber;
-    protected String color;
+
     protected int numberOfWheels;
-
-
 
     protected int parkinglotNumber;
 
+    protected Color color;
+
+    protected static int CAR = 1;
+    protected static int MOTORCYCLE = 11;
+    protected static int BUS = 21;
+
     public Vehicle(){
         registrationNumber = "AAA111";
-        color = "red";
+        color = Color.PURPLE;
         numberOfWheels = 4;
     }
 
     public Vehicle(String registrationNumber){
         this.registrationNumber = registrationNumber;
-        color = "red";
+        color = Color.RED;
         numberOfWheels = 4;
     }
 
-    public Vehicle(String registrationNumber, String color, int numberOfWheels){
+    public Vehicle(String registrationNumber, Color color, int numberOfWheels){
         this.registrationNumber = registrationNumber;
-        this.color = color;
+        color = Color.RED;
         this.numberOfWheels = numberOfWheels;
     }
 
-    public abstract void payment();
+    public abstract void park(Garage garage);
 
     public String getRegistrationNumber() {
         return registrationNumber;
@@ -38,5 +42,13 @@ public abstract class Vehicle {
 
     public void setParkinglotNumber(int parkinglotNumber) {
         this.parkinglotNumber = parkinglotNumber;
+    }
+
+    @Override
+    public String toString() {
+        return  "registrationNumber='" + registrationNumber + '\'' +
+                ", color='" + color + '\'' +
+                ", numberOfWheels=" + numberOfWheels +
+                ", parkinglotNumber=" + parkinglotNumber;
     }
 }

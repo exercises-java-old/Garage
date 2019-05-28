@@ -1,6 +1,6 @@
 public class EmptyVehicle extends Vehicle {
     @Override
-    public void payment() {
+    public void park(Garage garage) {
 
     }
 }

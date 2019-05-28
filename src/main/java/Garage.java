@@ -1,22 +1,21 @@
 import java.io.*;
 import java.util.*;
 
-public class Garage implements GarageInterface{
+public class Garage implements GarageInterface {
 
     private static String filePath = "C:\\Users\\zgrkbr\\git\\Garage\\garage.kib";
 
-    private int maxCapacity = 96;
-
-    private int currentParkingLot = 1;
+    private int maxCapacity = 30;
 
     private Map<Integer, Vehicle> vehicles = new HashMap<>(maxCapacity);
 
-    public int park(Vehicle vehicle) {
-        if(currentParkingLot <= maxCapacity) {
-            vehicle.setParkinglotNumber(currentParkingLot);
-            vehicles.put(currentParkingLot, vehicle);
-        }
-        return ++currentParkingLot;
+    public Garage() {
+
+    }
+
+    public void park(Vehicle vehicle, int parkingSlot) {
+        vehicle.setParkinglotNumber(parkingSlot);
+        vehicles.put(parkingSlot, vehicle);
     }
 
     public void unpark(Vehicle vehicle) {
@@ -24,10 +23,10 @@ public class Garage implements GarageInterface{
         vehicle.setParkinglotNumber(0);
     }
 
-    public Vehicle getVehicleByRegistrationNumber(String registrationNumber){
+    public Vehicle getVehicleByRegistrationNumber(String registrationNumber) {
         Collection<Vehicle> temp = vehicles.values();
-        for(Vehicle vehicle : temp){
-            if(vehicle.getRegistrationNumber().equals(registrationNumber)){
+        for (Vehicle vehicle : temp) {
+            if (vehicle.getRegistrationNumber().equals(registrationNumber)) {
                 return vehicle;
             }
         }
@@ -43,12 +42,22 @@ public class Garage implements GarageInterface{
         return null;
     }
 
-    public void setMaxCapacity(int maxCapacity){
-        if(maxCapacity <= 0) throw new IllegalArgumentException("The capacity may not be less than 1");
+    public void setMaxCapacity(int maxCapacity) {
+        if (maxCapacity <= 0) throw new IllegalArgumentException("The capacity may not be less than 1");
         this.maxCapacity = maxCapacity;
     }
 
-    public void save(){
+    @Override
+    public int findParkingLot(int offset) {
+        for (int i = offset; i <= offset+10; i++) {
+            if (!vehicles.containsKey(i)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void save() {
         File file = new File(filePath);
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
@@ -60,22 +69,32 @@ public class Garage implements GarageInterface{
         }
     }//save
 
-    public static Garage load(){
+    public static Garage load() {
         Garage temp = null;
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath));
-            temp = (Garage)ois.readObject();
+            temp = (Garage) ois.readObject();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("File not found");
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Load error");
-        } catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             System.out.println("Impossible error");
         }
         return temp;
     }//load
+
+    public String toString(){
+        String output = "";
+        Collection<Vehicle> temp = vehicles.values();
+        for(Vehicle v : temp){
+            output += v+"\n";
+        }
+        output += "Max capacity: "+maxCapacity;
+        return output;
+    }
 
 }

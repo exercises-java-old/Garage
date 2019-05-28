@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public interface GarageInterface {
 
-    int park(Vehicle vehicle);
+    void park(Vehicle vehicle, int parkingSlot);
 
     void unpark(Vehicle vehicle);
 
@@ -15,4 +15,5 @@ public interface GarageInterface {
 
     void setMaxCapacity(int maxCapacity);
 
+    int findParkingLot(int i);
 }

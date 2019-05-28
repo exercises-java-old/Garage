@@ -7,10 +7,6 @@ public class Bus extends Vehicle{
         numberOfSeats = 40;
     }
 
-    @Override
-    public void payment() {
-
-    }
 
     public Bus(int numberOfSeats) {
         super();
@@ -22,8 +18,18 @@ public class Bus extends Vehicle{
         this.numberOfSeats = numberOfSeats;
     }
 
-    public Bus(String registrationNumber, String color, int numberOfWheels, int numberOfSeats) {
+    public Bus(String registrationNumber, Color color, int numberOfWheels, int numberOfSeats) {
         super(registrationNumber, color, numberOfWheels);
         this.numberOfSeats = numberOfSeats;
     }
+
+    @Override
+    public void park(Garage garage) {
+        int emptySlot = garage.findParkingLot(Vehicle.BUS);
+        if(emptySlot != -1){
+            garage.park(this, emptySlot);
+        }
+    }
+
+
 }
