@@ -1,9 +1,12 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Garage implements GarageInterface{
+
+    private static String filePath = "C:\\Users\\zgrkbr\\git\\Garage\\garage.kib";
 
     private int maxCapacity = 96;
 
@@ -40,5 +43,35 @@ public class Garage implements GarageInterface{
         if(maxCapacity <= 0) throw new IllegalArgumentException("The capacity may not be less than 1");
         this.maxCapacity = maxCapacity;
     }
+
+    public void save(){
+        File file = new File(filePath);
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeObject(this);
+            System.out.println("Success!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to write.");
+        }
+    }//save
+
+    public static Garage load(){
+        Garage temp = null;
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath));
+            temp = (Garage)ois.readObject();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("File not found");
+        } catch (IOException e){
+            e.printStackTrace();
+            System.out.println("Load error");
+        } catch (ClassNotFoundException e){
+            System.out.println("Impossible error");
+        }
+        return temp;
+    }//load
 
 }

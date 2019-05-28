@@ -14,4 +14,5 @@ public interface GarageInterface {
     ArrayList<String> getTypesParked();
 
     void setMaxCapacity(int maxCapacity);
+
 }
