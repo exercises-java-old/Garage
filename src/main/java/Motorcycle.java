@@ -1,5 +1,10 @@
 public class Motorcycle extends Vehicle {
 
+
+    /**
+     * this class employs builder design
+     */
+
     String fuelType;
 
     public Motorcycle(){
